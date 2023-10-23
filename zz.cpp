@@ -16,14 +16,14 @@ void input(){
 }
 
 void Try(int k){
-    for(int i = 1; i<= (m-cur)/x[k]; i++){
+    for(int i=1; i<= (m-cur)/x[k]; i++){
         a[k] = i;
-        cur += x[k]*i;
+        cur += x[k]*i; 
         if(k == n){
             if(cur == m){
                 c++;
             }
-        }
+        } 
         else Try(k+1);
         cur -= x[k]*i;
     }
