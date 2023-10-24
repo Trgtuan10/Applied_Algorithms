@@ -1,37 +1,26 @@
-#include <bits/stdc++.h>
-
+#include <iostream>
+#include <vector>
 using namespace std;
 
-const int MOD = 1e9 + 7;
-int n;
-int cur = 0;
-int a[51];
-int c = 0;
+const int MOD = 1000000007;
 
+int countWays(int N) {
+    vector<int> dp(N + 1, 0);
+    dp[0] = 1;
 
-void input() {
-    cin >> n;
-    a[0] = 1;
-}
-
-void Try(int k) {
-    for (int i = a[k - 1]; i <= n - cur ; i++) {
-        // cout << k << " " <<i << endl;
-        a[k] = i;
-        cur += i;
-        if (cur == n) {
-            c = (c + 1) % MOD;
+    for (int i = 1; i <= N; i++) {
+        for (int j = i; j <= N; j++) {
+            dp[j] = (dp[j] + dp[j - i]) % MOD;
         }
-        else if(k > n || cur > n) break;
-        else {
-            Try(k + 1);
-        }
-        cur -= i;
     }
+
+    return dp[N];
 }
 
 int main() {
-    input();
-    Try(1);
-    cout << c;
+    int N;
+    cin >> N;
+    int ways = countWays(N);
+    cout << ways << endl;
+    return 0;
 }
